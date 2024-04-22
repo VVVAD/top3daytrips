@@ -1,0 +1,261 @@
+/* Basic CSS styles */
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap');
+
+.alef-regular {
+    font-family: "Alef", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.alef-bold {
+    font-family: "Alef", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+header {
+    background-color: #c5c5c5;
+    font-family: 'Alef', sans-serif;
+    color: #fff;
+    padding: 10px;
+    z-index: 1;
+    text-align: center;
+    position: fixed;
+    width: 98.1%;
+    top: 0;
+}
+
+nav {
+    display: inline-block;
+    /* Centering the nav */
+    direction: rtl;
+    
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+    /* Center the items */
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    /* Center the menu horizontally */
+    position: relative;
+    /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    /* Set the menu width relative to the window width */
+    max-width: 1000px;
+    /* Set a maximum width if desired */
+    
+}
+
+.menu {
+    display: flex;
+    margin-top: 20px;
+}
+
+.menu-item {
+    position: relative;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    transition: transform 0.3s ease;
+
+}
+.menu-item.clicked {
+    transform: scale(1.2); /* Increase size when clicked */
+}
+
+.menu-item.clicked .menu-image {
+    filter: none; /* Keep clicked image in color */
+}
+
+.menu-item .menu-image.grayscale {
+    filter: grayscale(100%); /* Convert other images to grayscale */
+}
+.menu-image {
+    width: 500px;
+    height: 700px;
+    /* Set the height of the menu item */
+    object-fit: cover;
+    /* Fill the container while maintaining aspect ratio */
+    filter: blur(1px) grayscale();
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.menu-item:hover .menu-image  {
+    transform: scale(1.05);
+    filter:none;
+    transition: transform 0.3s ease, filter 0.3s ease;
+
+}
+
+.menu-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.fadein {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#content {
+    margin-top: 60px;
+    /* Add space below the fixed header */
+    padding: 20px;
+    border: 1px solid #ccc;
+    font-family: system-ui, sans-serif;
+}
+
+#map {
+    width: 1900px;
+    height: 700px;
+    margin-top: 10px;
+}
+
+/* Media query for adjusting menu position */
+@media screen and (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        /* Stack items vertically */
+    }
+
+    nav ul li {
+        margin: 5px 0;
+        /* Adjust margin for vertical stacking */
+    }
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.leaflet-container {
+    height: 400px;
+    width: 600px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#generateRoutesBtn {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+}
+
+#generateRoutesBtn:hover {
+  background-color: #f7fafa;
+}
+
+#generateRoutesBtn:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 0;
+}
+
+input[type=radio] {
+    --s: 15px;     /* control the size */
+    --c: #f7fafa; /* the active color */
+    
+    height: var(--s);
+    aspect-ratio: 1;
+    border: calc(var(--s)/8) solid #000000;
+    padding: calc(var(--s)/8);
+    background: 
+       radial-gradient(farthest-side,#141414 94%,#0000) 
+       50%/0 0 no-repeat content-box;
+    border-radius: 50%;
+    outline-offset: calc(var(--s)/10);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    font-size: inherit;
+    transition: .3s;
+  }
+  input[type=radio]:checked {
+    border-color: #000000;
+    background-size: 100% 100%;
+  }
+  
+  input[type=radio]:disabled {
+    background: 
+       linear-gradient(#939393 0 0) 
+       50%/100% 20% no-repeat content-box;
+    opacity: .5;
+    cursor: not-allowed;
+  }
+  
+  @media print {
+    input[type=radio] {
+      -webkit-appearance: auto;
+      -moz-appearance: auto;
+      appearance: auto;
+      background: none;
+    }
+  }
+  
+  label {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:5px 0;
+    cursor: pointer;
+  }
+
+  #loader {
+    
+    border: 5px solid #EAF0F6;
+    border-radius: 50%;
+    border-top: 5px solid #000000;
+    width: 10px;
+    height: 10px;
+    animation: spinner 0.5s linear infinite;
+    visibility: hidden;
+    display: inline-block;
+  }
+  @keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
