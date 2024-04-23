@@ -70,6 +70,8 @@ document.body.addEventListener('change', function (event) {
     var countryCode = targetSelect.value;
     setMapViewToCountry(countryCode);
     localStorage.setItem('selectedCountry', countryCode);
+    localStorage.removeItem('dataId');
+    fetchData();
   }
 });
 
@@ -142,21 +144,8 @@ function generateRandomRoutes() {
 
 
 // Function to enter a page
-function enterPage(pageNumber, event) {
+function enterPage(pageNumber) {
   // Remove any previously displayed routes
-  // Remove "clicked" class from all menu items
-  document.querySelectorAll('.menu-item').forEach(function (item) {
-    item.classList.remove('clicked');
-  });
-
-  // Add "clicked" class to the clicked menu item
-  var menuItem = event.currentTarget.parentNode;
-  menuItem.classList.add('clicked');
-
-  // Navigate to the corresponding page
-  // Replace this with your actual navigation code
-  console.log("Navigating to page " + pageNumber);
-
   removeDisplayedRoute();
 
   // Set the current page in localStorage
@@ -171,7 +160,7 @@ function enterPage(pageNumber, event) {
 function removeDisplayedRoute() {
   // Remove any existing routing controls from the map
   routingControls.forEach(function (routingControl) {
-    map.removeControl(routingControl);
+      map.removeControl(routingControl);
   });
   routingControls = [];
 }
@@ -182,40 +171,40 @@ function addRouteToMap(routeIndex) {
   var storedRoutesString = localStorage.getItem("storedRoutes");
 
   if (storedRoutesString) {
-    // Parse routes string back into an array
-    var storedRoutes = JSON.parse(storedRoutesString);
+      // Parse routes string back into an array
+      var storedRoutes = JSON.parse(storedRoutesString);
 
-    // Check if the route index is valid
-    if (routeIndex >= 0 && routeIndex < storedRoutes.length) {
-      // Get route data for the specified index
-      var routeData = storedRoutes[routeIndex];
+      // Check if the route index is valid
+      if (routeIndex >= 0 && routeIndex < storedRoutes.length) {
+          // Get route data for the specified index
+          var routeData = storedRoutes[routeIndex];
 
-      // Add the route to the map
-      var waypoints = routeData.map(function (waypoint) {
-        return L.latLng(waypoint.lat, waypoint.lng);
-      });
+          // Add the route to the map
+          var waypoints = routeData.map(function(waypoint) {
+              return L.latLng(waypoint.lat, waypoint.lng);
+          });
 
-      var routingControl = L.Routing.control({
-        waypoints: waypoints,
-        lineOptions: {
-          styles: [{ color: '#007bff', opacity: 0.7, weight: 5 }]
-        },
-        routeWhileDragging: true,
-        router: L.Routing.osrmv1({
-          serviceUrl: 'https://router.project-osrm.org/route/v1'
-        })
-      });
+          var routingControl = L.Routing.control({
+              waypoints: waypoints,
+              lineOptions: {
+                  styles: [{ color: '#007bff', opacity: 0.7, weight: 5 }]
+              },
+              routeWhileDragging: true,
+              router: L.Routing.osrmv1({
+                  serviceUrl: 'https://router.project-osrm.org/route/v1'
+              })
+          });
 
-      // Add the routing control to the map
-      routingControl.addTo(map);
+          // Add the routing control to the map
+          routingControl.addTo(map);
 
-      // Add the routing control to the array for tracking
-      routingControls.push(routingControl);
-    } else {
-      console.log("Invalid route index.");
-    }
+          // Add the routing control to the array for tracking
+          routingControls.push(routingControl);
+      } else {
+          console.log("Invalid route index.");
+      }
   } else {
-    console.log("No stored routes found in localStorage.");
+      console.log("No stored routes found in localStorage.");
   }
 }
 
@@ -224,15 +213,16 @@ function addRouteToMap(routeIndex) {
 
 
 window.onload = function () {
+  resizeMenuImage();
   var selectedCountry = localStorage.getItem('selectedCountry');
   if (selectedCountry) {
     // Set the map view to the selected country
     setMapViewToCountry(selectedCountry);
-
+    
   }
   var currentPage = localStorage.getItem("currentPage");
   if (currentPage) {
-    enterPage(parseInt(currentPage));
+      enterPage(parseInt(currentPage));
   }
 };
 

@@ -70,10 +70,30 @@ document.body.addEventListener('click', function (event) {
     generateRandomRoutes();
     var currentPage = localStorage.getItem("currentPage");
     if (currentPage) {
-        enterPage(parseInt(currentPage));
+      enterPage(parseInt(currentPage));
     }
   }
 });
+
+function isHomePage() {
+  // Check whatever conditions necessary to determine if it's the home page
+  // For example, you can check the current URL
+  return window.location.pathname === '/index.html'; // Adjust the URL as needed
+}
+
+// Resize the width of the .menu-image
+function resizeMenuImage() {
+  const menuImages  = document.querySelectorAll('.menu-image');
+  menuImages.forEach(function (menuImage) {
+    if (isHomePage()) {
+      // Set the width to 700px for the home page
+      menuImage.style.height = '700px';
+    } else {
+      // Set the width to 70px for other pages
+      menuImage.style.height = '70px';
+    }
+  });
+}
 
 
 
