@@ -1,24 +1,6 @@
 async function fetchData() {
     let dataId = localStorage.getItem("dataId");
 
-    try {
-        const response = await fetch('https://top3daytrips-ff0soenqy-vvvads-projects.vercel.app/api/userData', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ imageData: '123' }) // Replace 'NEW_ID_HERE' with the actual new ID
-        });
-
-        if (response.ok) {
-            console.log('New ID stored successfully in MongoDB');
-        } else {
-            console.error('Failed to store new ID in MongoDB');
-        }
-    } catch (error) {
-        console.error('Error storing new ID:', error);
-    }
-
 
     if (!dataId) { }
     else { checkStatus(dataId); return; } // If dataId is not found in local storage, exit function
