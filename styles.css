@@ -110,11 +110,12 @@ nav ul {
 }
 
 #content {
+    text-align: center;
     margin-top: 60px;
     /* Add space below the fixed header */
     padding: 20px;
     border: 1px solid #ccc;
-    font-family: system-ui, sans-serif;
+    font-family: "Alef", sans-serif;
 }
 
 #map {

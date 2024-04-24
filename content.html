@@ -1,13 +1,14 @@
 <form id="routeOptionsForm">
-    <label for="routeOption">Select a route option:</label><br>
-    <input type="radio" name="routeOption" value="walk" checked> Walk
-    <input type="radio" name="routeOption" value="ride"> Ride
-    <input type="radio" name="routeOption" value="car"> Car<br><br>
-    <label for="countrySelect">Select a country:</label><br>
+    <label for="routeOption">:בחר סוג מסלול</label><br>
+    <input type="radio" name="routeOption" value="walk" checked> הליכה
+    <input type="radio" name="routeOption" value="ride"> אופניים
+    <input type="radio" name="routeOption" value="car"> רכב<br><br>
+    
+    <label for="countrySelect">:בחר מדינה</label><br>
     <select id="countrySelect">
         <!-- Dropdown options will be dynamically populated using JavaScript -->
     </select>
-    <button id="generateRoutesBtn">Generate Random Routes</button>
+    <button id="generateRoutesBtn">בניית מסלולים אקראית</button>
     <div id="loader"></div>
 </form>
 

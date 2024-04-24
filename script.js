@@ -41,6 +41,7 @@ async function fetchCountriesData() {
 
 // Function to populate the dropdown menu with countries
 function populateCountryDropdown(countries) {
+
   var selectElement = document.getElementById('countrySelect');
   countries.forEach(function (country) {
     var option = document.createElement('option');
@@ -52,10 +53,14 @@ function populateCountryDropdown(countries) {
 
 fetchCountriesData()
   .then(countries => {
-    populateCountryDropdown(countries);
-    //setMapViewToCountry(document.getElementById('countrySelect').value);
-    var selectedCountry = localStorage.getItem('selectedCountry');
-    document.getElementById('countrySelect').value = selectedCountry;
+    setTimeout(function () {
+      populateCountryDropdown(countries);
+      //setMapViewToCountry(document.getElementById('countrySelect').value);
+      var selectedCountry = localStorage.getItem('selectedCountry');
+      document.getElementById('countrySelect').value = selectedCountry;
+      console.log('Delayed code executed after 2 seconds');
+    }, 100);
+
   })
   .catch(error => {
     console.error('Error fetching countries data:', error);
@@ -83,7 +88,7 @@ function isHomePage() {
 
 // Resize the width of the .menu-image
 function resizeMenuImage() {
-  const menuImages  = document.querySelectorAll('.menu-image');
+  const menuImages = document.querySelectorAll('.menu-image');
   menuImages.forEach(function (menuImage) {
     if (isHomePage()) {
       // Set the width to 700px for the home page
