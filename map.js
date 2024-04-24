@@ -63,6 +63,26 @@ async function setMapViewToCountry(countryCode) {
 }
 
 
+// Function to remove the image from the database
+async function removeImageFromDB() {
+  try {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    const response = await fetch(`https://top3daytrips-db.vercel.app/api/userdata/${userId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to remove image from DB');
+    }
+
+    console.log('Image removed from DB successfully');
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
 // Event delegation for handling change events on country select element
 document.body.addEventListener('change', function (event) {
   var targetSelect = event.target.closest('#countrySelect');
@@ -71,7 +91,11 @@ document.body.addEventListener('change', function (event) {
     setMapViewToCountry(countryCode);
     localStorage.setItem('selectedCountry', countryCode);
     localStorage.removeItem('dataId');
+    removeImageFromDB();
     fetchData();
+
+    // Remove the image from the database when changing the country
+    
   }
 });
 
