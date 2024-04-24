@@ -1,9 +1,28 @@
 async function fetchData() {
     let dataId = localStorage.getItem("dataId");
-    
-    if (!dataId) {}
-    else{checkStatus(dataId); return;} // If dataId is not found in local storage, exit function
-    
+
+    try {
+        const response = await fetch('https://top3daytrips-ff0soenqy-vvvads-projects.vercel.app/api/userData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ imageData: '123' }) // Replace 'NEW_ID_HERE' with the actual new ID
+        });
+
+        if (response.ok) {
+            console.log('New ID stored successfully in MongoDB');
+        } else {
+            console.error('Failed to store new ID in MongoDB');
+        }
+    } catch (error) {
+        console.error('Error storing new ID:', error);
+    }
+
+
+    if (!dataId) { }
+    else { checkStatus(dataId); return; } // If dataId is not found in local storage, exit function
+
     const url = 'https://stablehorde.net/api/v2/generate/async';
     const apiKey = '0000000000';
     var selectedCountry = localStorage.getItem('selectedCountry');
@@ -80,7 +99,7 @@ async function getStatus(dataId) {
 
 async function checkStatus(dataId) {
     let id = localStorage.getItem("dataId");
-    if(id != dataId) return;
+    if (id != dataId) return;
     const url = `https://stablehorde.net/api/v2/generate/check/${dataId}`;
 
 
