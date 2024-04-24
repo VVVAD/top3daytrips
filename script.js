@@ -78,7 +78,8 @@ document.body.addEventListener('click', function (event) {
 function isHomePage() {
   // Check whatever conditions necessary to determine if it's the home page
   // For example, you can check the current URL
-  return window.location.pathname === '/index.html'; // Adjust the URL as needed
+
+  return '/index.html' in window.location.pathname; // Adjust the URL as needed
 }
 
 // Resize the width of the .menu-image
